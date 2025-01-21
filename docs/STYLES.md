@@ -31,13 +31,6 @@
 │   └── ...                # Другие файлы документации
 
 
-РАЗВЕРТЫВАЕНИЕ НА ХОСТИНГЕ
-
-пока что строки с подключением подвала и шапки выглядят так:
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/dbstudio/includes/header.php'; ?> 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/dbstudio/includes/footer.php'; ?>
-(подключены с помощью абсолютного путя)
-
-когда я доделаю все страница нужно будет указать относительный путь: 
-<?php include '../includes/header.php'; ?> // Относительный путь
-<?php include '../includes/footer.php'; ?> // Относительный путь
+// email и пароль для администратора (в файле create_admin.php)
+$email = 'admin@example.com';
+$password = password_hash('12345', PASSWORD_DEFAULT); // Хешируем пароль

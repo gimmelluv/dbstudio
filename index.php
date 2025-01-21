@@ -10,6 +10,7 @@ session_start();
     <title>Главная страница</title>
     <link rel="stylesheet" href="CSS/header.css"> <!-- Подключаем стили для шапки -->
     <link rel="stylesheet" href="CSS/footer.css"> <!-- Подключаем стили для подвала -->
+    <link rel="stylesheet" href="CSS/modal_register.css">
 </head>
 <body>
     <?php include 'includes/header.php'; ?> <!-- Подключение шапки -->

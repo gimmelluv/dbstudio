@@ -13,6 +13,7 @@
     <title>Лаборатория</title>
     <link rel="stylesheet" href="../../CSS/header.css"> <!-- Подключение стилей для шапки -->
     <link rel="stylesheet" href="../../CSS/footer.css"> <!-- Подключение стилей для подвала -->
+    <link rel="stylesheet" href="../../CSS/modal_register.css">
     <link rel="stylesheet" href="../laboratory/laboratory.css"> <!-- Подключаем стили для страницы лаборатории -->
 </head>
 <body>
