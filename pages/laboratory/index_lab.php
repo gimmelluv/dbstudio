@@ -1,8 +1,24 @@
 <?php
-//session_start();
-//require_once '../dbconnect.php';
+session_start();
+require_once '../../dbconnect.php'; // Подключение к базе данных
 
 // Проверяем, авторизован ли пользователь
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); // Перенаправляем на страницу входа, если не авторизован
+    exit;
+}
+
+// Получаем диаграммы пользователя из базы данных
+$user_id = $_SESSION['user_id'];
+$stmt = $conn->prepare("SELECT * FROM diagrams WHERE user_id = ?");
+$stmt->execute([$user_id]);
+
+// Получаем результаты
+$diagrams = [];
+$result = $stmt->get_result(); // Получаем результат выполнения запроса
+while ($row = $result->fetch_assoc()) { // Извлекаем строки результата
+    $diagrams[] = $row; // Добавляем каждую строку в массив
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,17 +27,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лаборатория</title>
-    <link rel="stylesheet" href="../../CSS/header.css"> <!-- Подключение стилей для шапки -->
-    <link rel="stylesheet" href="../../CSS/footer.css"> <!-- Подключение стилей для подвала -->
+    <link rel="stylesheet" href="../../CSS/header.css"> <!-- Подключаем стили для шапки -->
+    <link rel="stylesheet" href="../../CSS/footer.css"> <!-- Подключаем стили для подвала -->
     <link rel="stylesheet" href="../../CSS/modal_register.css">
-    <link rel="stylesheet" href="../laboratory/laboratory.css"> <!-- Подключаем стили для страницы лаборатории -->
+    <link rel="stylesheet" href="../../CSS/laboratory.css"> <!-- Подключаем стили для страницы лаборатории -->
 </head>
 <body>
-    <?php include '../../includes/header.php'; ?>
+    <?php include '../../includes/header.php'; ?> <!-- Подключение шапки -->
 
     <div class="lab-container">
         <h1 class="lab-container__title">Работа с диаграммами</h1>
         
+        <!-- Отображение папок с заданиями -->
+        <div class="lab-assignments">
+            <h2 class="lab-assignments__title">Ваши диаграммы:</h2>
+            <ul class="lab-assignments__list">
+                <?php if ($diagrams): ?>
+                    <?php foreach ($diagrams as $diagram): ?>
+                        <li class="lab-assignments__item">
+                            <a href="path_to_diagram_view.php?id=<?php echo $diagram['id']; ?>" class="lab-assignments__link">
+                                <?php echo htmlspecialchars($diagram['name']); ?> <!-- Имя диаграммы -->
+                            </a>
+                            <p class="lab-assignments__comment"><?php echo htmlspecialchars($diagram['comment']); ?></p> <!-- Комментарий к диаграмме -->
+                            <p class="lab-assignments__date">Создано: <?php echo date('d-m-Y H:i', strtotime($diagram['created_at'])); ?></p> <!-- Дата создания -->
+                        </li>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li class="lab-assignments__item">У вас нет загруженных диаграмм.</li>
+                <?php endif; ?>
+            </ul>
+        </div>
+
+
         <!-- Инструкции -->
         <div class="lab-instructions">
             <h3 class="lab-instructions__heading">Как сохранить диаграмму:</h3>
@@ -59,6 +96,6 @@
         ?>
     </div>
 
-    <?php include '../../includes/footer.php'; ?>
+    <?php include '../../includes/footer.php'; ?> <!-- Подключение подвала -->
 </body>
 </html>
