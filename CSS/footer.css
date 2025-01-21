@@ -1,0 +1,36 @@
+/* footer.css */
+
+/* Общие стили для подвала */
+.footer-index {
+    display: flex;
+    justify-content: flex-start;
+    padding: 40px 30px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 100px;
+}
+
+.footer-index__column {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px; /* Отступ между колонками */
+}
+
+.footer-index__heading {
+    font-weight: normal;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.footer-index__text {
+    font-weight: normal;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+/* Убираем отступ у последнего элемента в колонке */
+.footer-index__column:last-child {
+    margin-right: 0;
+}
