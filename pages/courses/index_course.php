@@ -1,8 +1,5 @@
 <?php
-//session_start();
-//require_once '../dbconnect.php';
-
-// Проверяем, авторизован ли пользователь
+session_start();
 ?>
 
 <!DOCTYPE html>
