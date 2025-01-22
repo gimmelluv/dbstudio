@@ -1,6 +1,6 @@
 <?php
 //session_start();
-//require_once '../dbconnect.php';
+//require_once '../dbconnect.php'; 
 
 // Проверяем, авторизован ли пользователь
 ?>
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../../CSS/footer.css"> <!-- Подключение стилей для подвала -->
     <link rel="stylesheet" href="../../CSS/modal_register.css">
     <link rel="stylesheet" href="../laboratory/laboratory.css"> <!-- Подключаем стили для страницы лаборатории -->
+    <script src="../../JS/script_modal.js" defer></script>
 </head>
 <body>
     <?php include '../../includes/header.php'; ?>
