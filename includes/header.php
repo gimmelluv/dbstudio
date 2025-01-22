@@ -51,5 +51,5 @@
               </div>
             </div>
           </div>
-   
+    <script src="JS/script_modal.js" defer></script>
 </header>

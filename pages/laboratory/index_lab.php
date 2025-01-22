@@ -2,6 +2,12 @@
 session_start();
 require_once '../../dbconnect.php'; // Подключение к базе данных
 
+// Проверяем, авторизован ли пользователь
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php'); // Перенаправляем на страницу входа, если не авторизован
+    exit;
+}
+
 // Получаем диаграммы пользователя из базы данных
 $user_id = $_SESSION['user_id'];
 $stmt = $conn->prepare("SELECT * FROM diagrams WHERE user_id = ?");
@@ -25,7 +31,6 @@ while ($row = $result->fetch_assoc()) { // Извлекаем строки ре�
     <link rel="stylesheet" href="../../CSS/footer.css"> <!-- Подключаем стили для подвала -->
     <link rel="stylesheet" href="../../CSS/modal_register.css">
     <link rel="stylesheet" href="../../CSS/laboratory.css"> <!-- Подключаем стили для страницы лаборатории -->
-    <script src="../../JS/script_modal.js" defer></script>
 </head>
 <body>
     <?php include '../../includes/header.php'; ?> <!-- Подключение шапки -->
